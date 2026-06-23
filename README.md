@@ -1,77 +1,115 @@
 ﻿# solana-token-launch-skill
 
-A production-grade Claude Code / Codex skill for the entire Solana token launch lifecycle — from tokenomics design to post-launch maintenance.
+A Claude Code and Codex skill that helps builders make informed decisions throughout the Solana token launch lifecycle.
 
-## What This Solves
+## Overview
 
-Every Solana builder eventually asks: "How do I launch a token properly?" — but no single resource covers the full picture. Existing skills are either protocol-specific (pump.fun, Jupiter) or too generic. This skill gives AI agents the full decision-making context a real launch advisor would have.
+Launching a token involves far more than creating a mint. Builders must make decisions around tokenomics, liquidity, launch venues, vesting, distribution, and post-launch operations. This skill provides structured guidance and decision frameworks for each stage of the process.
 
-## What It Covers
+The goal is to help builders avoid common launch mistakes and improve launch readiness using practical, Solana-specific guidance.
 
-- Tokenomics design (supply, allocation, emission schedule)
-- Launch venue selection (pump.fun vs Raydium vs Orca vs Meteora)
-- Liquidity bootstrapping strategies
-- Vesting and cliff structures
-- Post-launch maintenance (price stability, community, liquidity health)
-- Legal and compliance checklist
+## Features
+
+* Tokenomics design frameworks
+* Launch venue selection guidance
+* Liquidity bootstrapping strategies
+* Vesting and unlock planning
+* Post-launch operational checklists
+* Risk assessment and launch readiness reviews
+* Curated ecosystem resources
+
+## Topics Covered
+
+### Tokenomics
+
+* Supply planning
+* Allocation design
+* Circulating supply considerations
+* Emission schedules
+
+### Launch Venues
+
+* pump.fun
+* Raydium
+* Meteora
+* Orca
+
+### Liquidity
+
+* Initial liquidity planning
+* Pool selection
+* Liquidity management strategies
+
+### Vesting
+
+* Team allocations
+* Investor allocations
+* Treasury unlock schedules
+* Community incentive programs
+
+### Post-Launch Operations
+
+* Liquidity monitoring
+* Community communication
+* Treasury management
+* Growth and sustainability considerations
 
 ## Installation
 
-### Option 1: Standard Install
-curl -fsSL https://raw.githubusercontent.com/0x-prv/solana-token-launch-skill/main/install.sh | bash
+### Standard Installation
 
-### Option 2: Manual
-git clone https://github.com/0x-prv/solana-token-launch-skill
-cd solana-token-launch-skill
+```bash
+curl -fsSL https://raw.githubusercontent.com/0x-prv/solana-token-launch-skill-/main/install.sh | bash
+```
+
+### Manual Installation
+
+```bash
+git clone https://github.com/0x-prv/solana-token-launch-skill-
+cd solana-token-launch-skill-
 ./install.sh
+```
 
-## Usage
+## Example Prompts
 
-Once installed, just talk to your agent naturally:
+* I want to launch a utility token on Solana
+* Which launch venue should I choose for a governance token?
+* Help me design a vesting schedule for my team
+* How much liquidity should I provide at launch?
+* Review my token launch plan
 
-- "I want to launch a utility token for my DeFi protocol"
-- "What is the best launch venue for a meme coin?"
-- "Help me design a vesting schedule for my team allocation"
-- "How do I bootstrap liquidity on Orca?"
-- "What are the legal risks of launching a token in the Philippines?"
+## Repository Structure
 
-## Skill Structure
-
+```text
 solana-token-launch-skill/
-├── CLAUDE.md                          # Agent configuration
-├── README.md                          # This file
-├── LICENSE                            # MIT
-├── install.sh                         # Standard installer
-├── install-custom.sh                  # Custom installer
-│
+├── CLAUDE.md
+├── README.md
+├── LICENSE
+├── install.sh
+├── install-custom.sh
 ├── skill/
-│   ├── SKILL.md                       # Main router
+│   ├── SKILL.md
 │   └── references/
-│       ├── tokenomics.md              # Supply, allocation, emissions
-│       ├── launch-venue.md            # pump.fun vs Raydium vs Orca vs Meteora
-│       ├── liquidity-bootstrap.md     # Liquidity strategies
-│       ├── vesting-cliff.md           # Vesting and cliff structures
-│       ├── post-launch.md             # Post-launch maintenance
-│       ├── legal-checklist.md         # Legal and compliance
-│       └── resources.md               # Curated links
-│
 ├── agents/
-│   └── token-launch-advisor.md        # Specialized agent
-│
 └── commands/
-    └── launch-checklist.md            # Workflow command
+```
 
-## Dependencies
+## Design Principles
 
-No required dependencies. Works standalone or alongside:
-- solana-dev-skill (recommended)
-- metaplex-skill (for token metadata)
+* Progressive loading
+* Modular knowledge organization
+* Token-efficient routing
+* Practical builder workflows
+* Solana-specific guidance
 
 ## License
 
-MIT — free to use, modify, and merge into the Solana AI Kit.
+MIT License
 
 ## Author
 
-PRV ([@0x-prv](https://github.com/0x-prv))
-Built for the Solana AI Kit Bounty 2026.
+PRV
+
+GitHub: https://github.com/0x-prv
+
+Built for the Solana AI Kit Skill Bounty.
