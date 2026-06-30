@@ -1,97 +1,171 @@
 ﻿#!/usr/bin/env bash
-# solana-token-launch-skill installer
-# Usage: ./install.sh [-y]
+
+# ==========================================================
+# Solana Token Launch Skill Installer
+# Installs the skill into Claude Code / Codex
+# ==========================================================
 
 set -e
 
 SKILL_NAME="solana-token-launch-skill"
-SKILL_REPO="https://github.com/0x-prv/solana-token-launch-skill"
-DEFAULT_INSTALL_DIR="C:\Users\LENOVO/.claude/skills"
-CLAUDE_MD_TARGET="C:\Users\LENOVO/.claude/CLAUDE.md"
+SKILL_REPO="https://github.com/0x-prv/solana-token-launch-skill-.git"
 
-# Colors
+DEFAULT_INSTALL_DIR="$HOME/.claude/skills"
+CLAUDE_MD="$HOME/.claude/CLAUDE.md"
+
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m'
 
-echo -e ""
-echo "================================================"
-echo "  solana-token-launch-skill Installer"
-echo "  The complete Solana token launch lifecycle"
-echo "================================================"
-echo -e ""
+echo ""
+echo -e "${BLUE}====================================================${NC}"
+echo -e "${BLUE} Solana Token Launch Skill Installer${NC}"
+echo -e "${BLUE}====================================================${NC}"
+echo ""
 
 NON_INTERACTIVE=false
-if [[ "" == "-y" ]]; then
-  NON_INTERACTIVE=true
+
+if [[ "$1" == "-y" ]]; then
+    NON_INTERACTIVE=true
 fi
 
-# Step 1: Install location
-if [ "" = true ]; then
-  INSTALL_DIR=""
+########################################
+# Installation directory
+########################################
+
+if [ "$NON_INTERACTIVE" = true ]; then
+
+    INSTALL_DIR="$DEFAULT_INSTALL_DIR"
+
 else
-  echo -e "Where do you want to install the skill?"
-  echo "  1) Personal: ~/.claude/skills/ (recommended)"
-  echo "  2) Project:  ./.claude/skills/ (current directory)"
-  read -p "Choice [1]: " choice
-  choice=
-  if [ "" = "2" ]; then
-    INSTALL_DIR="./.claude/skills"
-  else
-    INSTALL_DIR=""
-  fi
+
+    echo "Choose installation location:"
+    echo ""
+    echo "1) Personal (~/.claude/skills)"
+    echo "2) Project (./.claude/skills)"
+    echo ""
+
+    read -p "Choice [1]: " choice
+    choice=${choice:-1}
+
+    if [ "$choice" = "2" ]; then
+        INSTALL_DIR="./.claude/skills"
+    else
+        INSTALL_DIR="$DEFAULT_INSTALL_DIR"
+    fi
+
 fi
 
-mkdir -p ""
-SKILL_DIR="/"
+mkdir -p "$INSTALL_DIR"
 
-# Step 2: Clone or update
-if [ -d "" ]; then
-  echo -e "Skill already exists. Updating..."
-  git -C "" pull origin main
+SKILL_DIR="$INSTALL_DIR/$SKILL_NAME"
+
+########################################
+# Clone or Update
+########################################
+
+if [ -d "$SKILL_DIR/.git" ]; then
+
+    echo ""
+    echo -e "${YELLOW}Updating existing installation...${NC}"
+
+    git -C "$SKILL_DIR" pull origin main
+
 else
-  echo -e "Cloning ..."
-  git clone "" ""
+
+    echo ""
+    echo -e "${GREEN}Installing skill...${NC}"
+
+    git clone "$SKILL_REPO" "$SKILL_DIR"
+
 fi
 
-# Step 3: CLAUDE.md integration
-if [ "" = true ]; then
-  INTEGRATE_CLAUDE=true
+########################################
+# CLAUDE.md Integration
+########################################
+
+if [ "$NON_INTERACTIVE" = true ]; then
+
+    INTEGRATE=true
+
 else
-  echo ""
-  read -p "Integrate with ~/.claude/CLAUDE.md? [Y/n]: " integrate
-  integrate=
-  if [[ "" =~ ^[Yy] ]]; then
-    INTEGRATE_CLAUDE=true
-  else
-    INTEGRATE_CLAUDE=false
-  fi
+
+    echo ""
+    read -p "Integrate with ~/.claude/CLAUDE.md? [Y/n]: " reply
+
+    reply=${reply:-Y}
+
+    if [[ "$reply" =~ ^[Yy]$ ]]; then
+        INTEGRATE=true
+    else
+        INTEGRATE=false
+    fi
+
 fi
 
-if [ "" = true ]; then
-  mkdir -p ""
-  SKILL_REF="@/CLAUDE.md"
-  if [ -f "" ] && grep -q "" ""; then
-    echo -e "CLAUDE.md already references this skill."
-  else
-    echo "" >> ""
-    echo "# solana-token-launch-skill" >> ""
-    echo "" >> ""
-    echo -e "Added to CLAUDE.md"
-  fi
+if [ "$INTEGRATE" = true ]; then
+
+    mkdir -p "$(dirname "$CLAUDE_MD")"
+
+    touch "$CLAUDE_MD"
+
+    if grep -q "$SKILL_NAME" "$CLAUDE_MD"; then
+
+        echo -e "${YELLOW}CLAUDE.md already contains this skill.${NC}"
+
+    else
+
+cat >> "$CLAUDE_MD" <<EOF
+
+# $SKILL_NAME
+
+@$SKILL_DIR/CLAUDE.md
+
+EOF
+
+        echo -e "${GREEN}Added skill to CLAUDE.md${NC}"
+
+    fi
+
 fi
+
+########################################
+# Finished
+########################################
 
 echo ""
-echo -e "================================================"
-echo -e "  Installation complete!"
-echo -e "================================================"
+echo -e "${GREEN}====================================================${NC}"
+echo -e "${GREEN} Installation Complete${NC}"
+echo -e "${GREEN}====================================================${NC}"
+
 echo ""
-echo "Skill installed at: "
+echo "Installed to:"
+echo "  $SKILL_DIR"
+
 echo ""
-echo "Try it in Claude Code:"
-echo "  'I want to launch a utility token on Solana'"
-echo "  'Help me design my tokenomics'"
-echo "  'Which DEX should I launch on?'"
-echo "  '/launch-checklist'"
+echo "Available Commands:"
+echo "  • review-launch-plan"
+echo "  • generate-tokenomics"
+echo "  • generate-vesting"
+echo "  • compare-launch-venues"
+echo "  • launch-checklist"
+echo "  • launch-readiness"
+
+echo ""
+echo "Example Prompts:"
+echo ""
+echo "  I want to launch a utility token on Solana."
+echo ""
+echo "  Review my token launch plan."
+echo ""
+echo "  Generate sustainable tokenomics."
+echo ""
+echo "  Compare Raydium vs Meteora."
+echo ""
+echo "  Design a vesting schedule for my team."
+echo ""
+
+echo -e "${BLUE}Happy Building!${NC}"
 echo ""

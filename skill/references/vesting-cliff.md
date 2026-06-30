@@ -1,174 +1,308 @@
-﻿# Vesting and Cliff Structures for Solana Token Launches
+﻿# Vesting and Cliff Structures
 
-## Core Principle
-Vesting protects your community. Unlocked team tokens are the single biggest trust killer in crypto. In 2026, experienced Solana investors will not participate in a private sale or public launch without seeing locked allocation proof first. This is no longer optional — it is baseline.
+## Purpose
 
----
+Vesting aligns long-term incentives between founders, contributors, investors, and the community.
 
-## How On-Chain Vesting Works on Solana
+A well-designed vesting strategy reduces sell pressure, improves credibility, and demonstrates long-term commitment to the project.
 
-Modern Solana token lockers use Program Derived Addresses (PDAs) to hold tokens in on-chain vaults:
-
-- PDA vaults have no private keys — nobody can access tokens before unlock date
-- Not the team. Not the platform. Not any third party.
-- Lock condition enforced at smart contract level
-- When unlock date arrives, original depositing wallet can withdraw
-- Every lock is publicly verifiable on Solscan — any investor can check independently
-
-This replaces whitepaper promises with cryptographic proof.
+This guide helps builders design transparent, sustainable, and verifiable vesting structures for Solana token launches.
 
 ---
 
-## 2026 Vesting Standards by Allocation
+# Questions to Ask First
 
-### Team and Founders (15–20% of supply)
-- **Minimum lock:** 12 months (hard floor — below this, serious investors walk)
-- **Recommended:** 12-month cliff + 24-month linear vesting
-- **Best practice:** 24-month cliff + 24-month linear vesting for credibility
-- Investors scrutinize this allocation most — no exceptions
+Before recommending a vesting schedule, identify:
 
-### Private Sale / Seed Investors (10–15% of supply)
-- **Minimum:** 6-month cliff + 12-month linear vesting
-- **Recommended:** 6-month cliff + 18-month linear vesting
-- Never fully unlocked at TGE — immediate dump destroys launch
-
-### Strategic Partners / Advisors (3–5% of supply)
-- **Minimum:** 3-month cliff + 12-month linear vesting
-- Advisors with no active role should have longer cliffs
-
-### Ecosystem / Grants (10–15% of supply)
-- Milestone-based releases preferred over pure time-based
-- Tie releases to: TVL targets, user growth, protocol revenue milestones
-- Time-based fallback: 6-month cliff + 24-month linear vesting
-
-### Treasury / Reserve (15–25% of supply)
-- Lock where possible — even partial locks signal commitment
-- Multisig control required (3/5 or 4/7 minimum)
-- Governance vote required for any treasury spend above threshold
-
-### Public Sale / Community (30–50% of supply)
-- This is the ONLY allocation freely tradeable from day one
-- No vesting — this is your circulating supply at launch
+- What type of token is being launched?
+- Who will receive token allocations?
+- Will there be private investors?
+- Is there a public token sale?
+- How long is the expected project roadmap?
+- Will governance control treasury unlocks?
+- Are milestone-based unlocks appropriate?
 
 ---
 
-## Vesting Schedule Types
+# Vesting Decision Tree
 
-### Linear Vesting
-Tokens release gradually over time at a constant rate.
+## Team Allocation
 
-Example: 1M tokens over 12 months = ~83,333 tokens released per month
+Recommended:
 
-Best for: Team, investors — predictable unlock schedule builds confidence
+- Long-term vesting
+- Cliff
+- Linear release
 
-### Cliff + Linear Vesting
-No tokens release until cliff date, then linear release begins.
+Priority:
 
-Example: 6-month cliff, then 12-month linear
-- Months 1–6: 0 tokens released
-- Months 7–18: ~83,333 tokens/month
-
-Best for: Team, private sale — prevents immediate dumps while rewarding long-term commitment
-
-### Milestone-Based Vesting
-Tokens release when on-chain or off-chain conditions are met.
-
-Example: 
-- 25% on mainnet launch
-- 25% on  TVL
-- 25% on 10,000 active users
-- 25% on  protocol revenue
-
-Best for: Ecosystem grants, advisor allocations tied to deliverables
-
-### Cliff-Only (One-Time Unlock)
-All tokens release at once after cliff period.
-
-Warning: Creates a predictable sell pressure event. Community will anticipate and front-run. Avoid for large allocations.
+- Community confidence
+- Long-term alignment
 
 ---
 
-## Unlock Event Management
+## Investor Allocation
 
-Large unlock events (cliff dates) are predictable sell pressure moments. Manage them proactively:
+Recommended:
 
-**30 days before cliff:**
-- Publish unlock date publicly with on-chain proof link
-- Communicate what team/investors plan to do with unlocked tokens
-- Consider staking incentives to encourage holding over selling
+- Cliff
+- Linear vesting
 
-**On cliff date:**
-- Have community update ready
-- Monitor price and volume closely
-- Have liquidity plan if price impact is severe
+Priority:
 
-**Historical pattern:** Solana projects show high volatility 7 days around cliff events. Plan communications accordingly.
+- Prevent immediate selling
+- Protect market stability
 
 ---
 
-## Tools for On-Chain Vesting on Solana
+## Treasury
 
-### Streamflow Finance (Recommended)
-- Vesting contracts, token locks, LP locks, staking pools, airdrops
-- Real-time tokenomics dashboard — consolidates all locks in one verifiable view
-- Used by 40,000+ projects on Solana
-- Supports SPL tokens and Token-2022
-- dashboard.streamflow.finance
+Recommended:
 
-### Bonfida Vesting
-- Simple vesting contracts
-- Audited, battle-tested
+- Multisig control
+- Governance approval
+- Transparent spending
 
-### Custom Anchor Program
-- Full control over vesting logic
-- Requires audit before mainnet
-- Only recommended if standard tools don't fit your use case
+Priority:
+
+- Long-term sustainability
 
 ---
 
-## Investor Verification Checklist
+## Community Rewards
 
-Before committing to any Solana TGE, experienced investors check:
+Recommended:
 
-1. Is team allocation locked? For how long?
-2. Is there a cliff or immediate linear vesting?
-3. Are lock proofs on-chain and publicly verifiable?
-4. Is treasury under multisig control?
-5. Is LP locked? For how long?
-6. What is the circulating supply at TGE vs. fully diluted valuation (FDV)?
-7. Are there any large unlocks in the first 6 months?
+- Scheduled distributions
+- Campaign-based rewards
+- Ecosystem incentives
 
-Your skill as a founder is to answer all 7 before investors ask.
+Priority:
+
+- Sustainable growth
 
 ---
 
-## TGE Circulating Supply vs FDV
+## Advisors
 
-One of the most watched metrics by 2026 investors:
+Recommended:
 
-**TGE Circulating Supply %** = (Public sale + unlocked community) / Total supply
+- Moderate vesting
+- Deliverable-based unlocks
 
-Low circulating supply at TGE (5–15%) + high FDV = red flag. Means:
-- Most supply still locked
-- If/when unlocked, massive dilution
-- Early buyers paying premium for future sell pressure
+Priority:
 
-**Healthy range:** 15–35% circulating at TGE for utility tokens. Meme coins typically launch with higher circulating supply via bonding curve.
+- Long-term contribution
 
 ---
 
-## Common Mistakes
+# Vesting Models
 
-- No cliff on team allocation → team can dump week 1
-- Cliff-only unlock for large allocations → predictable front-run event
-- Vesting off-chain only (spreadsheet promises) → not verifiable, not credible
-- No multisig on treasury → single point of failure
-- Not publishing lock proofs publicly → investors assume worst case
-- Milestone vesting with no on-chain oracle → milestone claims are not trustless
+## Linear Vesting
+
+Tokens unlock gradually over time.
+
+Recommended for:
+
+- Team
+- Contributors
+- Investors
+
+Advantages
+
+- Predictable
+- Stable
+- Transparent
 
 ---
 
-## Next Steps
+## Cliff + Linear
 
-- Post-launch maintenance → see post-launch.md
-- Legal considerations for your vesting structure → see legal-checklist.md
+No tokens unlock until the cliff expires.
+
+After the cliff:
+
+Tokens unlock gradually.
+
+Recommended for:
+
+- Founders
+- Private investors
+- Core contributors
+
+---
+
+## Milestone-Based
+
+Tokens unlock after predefined milestones.
+
+Examples
+
+- Mainnet launch
+- Governance activation
+- TVL targets
+- User growth
+
+Recommended for:
+
+- Ecosystem grants
+- Strategic partners
+
+---
+
+## Immediate Unlock
+
+Recommended only for:
+
+- Public sale allocation
+- Community distribution
+
+Avoid using immediate unlocks for large insider allocations.
+
+---
+
+# Treasury Best Practices
+
+Treasury assets should:
+
+- Use multisig wallets
+- Have transparent governance
+- Publish spending policies
+- Document major transfers
+
+Avoid single-wallet treasury management.
+
+---
+
+# Investor Expectations
+
+Before investing, experienced participants typically verify:
+
+- Team vesting
+- Investor vesting
+- Treasury controls
+- LP lock
+- Circulating supply
+- Future unlock schedule
+- Public documentation
+
+Transparent vesting builds confidence.
+
+---
+
+# Unlock Event Planning
+
+Before major unlocks:
+
+- Notify the community.
+- Publish updated allocation reports.
+- Review liquidity conditions.
+- Coordinate communications.
+- Monitor market activity.
+
+Large unlocks should never surprise the community.
+
+---
+
+# Risk Assessment
+
+High Risk
+
+- No vesting
+- Immediate insider unlocks
+- Single-wallet treasury
+- Hidden allocations
+
+Medium Risk
+
+- Short cliffs
+- Large scheduled unlocks
+- Poor documentation
+
+Lower Risk
+
+- Transparent vesting
+- Long-term alignment
+- Public reporting
+- Governance oversight
+
+---
+
+# Common Mistakes
+
+Avoid:
+
+- Unlocking team allocations too early.
+- Using spreadsheets instead of on-chain vesting.
+- Hiding allocation schedules.
+- Forgetting treasury governance.
+- Ignoring future dilution.
+
+---
+
+# Vesting Readiness Checklist
+
+Before launch verify:
+
+- Team vesting prepared
+- Investor vesting documented
+- Treasury secured
+- Multisig configured
+- Unlock schedule published
+- Community documentation completed
+
+---
+
+# Recommended Response Format
+
+Every recommendation should include:
+
+## Recommended Vesting
+
+...
+
+## Why
+
+...
+
+## Advantages
+
+...
+
+## Risks
+
+...
+
+## Best Practices
+
+...
+
+## Readiness
+
+...
+
+## Immediate Next Action
+
+...
+
+---
+
+# Best Practices
+
+Always:
+
+- Prefer long-term alignment.
+- Publish vesting schedules.
+- Use on-chain vesting whenever possible.
+- Secure treasury assets with multisig.
+- Communicate unlock events early.
+
+---
+
+# Next Steps
+
+After vesting is finalized:
+
+1. Review post-launch.md
+2. Review legal-checklist.md
+3. Complete launch-readiness.md

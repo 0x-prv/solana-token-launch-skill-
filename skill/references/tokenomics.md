@@ -1,103 +1,372 @@
-﻿# Tokenomics Design for Solana Token Launches
+﻿# Tokenomics Design
 
-## Core Principle
-The mint is 1% of the work. The infrastructure around it — locks, vesting, distribution, staking — is the 99% that determines survival. Plan tokenomics as an enforceable on-chain system, not a hopeful whitepaper promise.
+## Purpose
 
----
+Tokenomics is more than defining a token supply.
 
-## Step 1: Define Your Token Type
+A sustainable token economy aligns incentives between founders, contributors, investors, users, and the community while supporting long-term protocol growth.
 
-Your token type determines every decision below.
-
-| Type | Total Supply | Primary Goal |
-|------|-------------|--------------|
-| Meme coin | 1B tokens | Community / culture |
-| Utility token | 100M tokens | Protocol access / fees |
-| Governance token | 100M–500M | DAO voting |
-| DeFi / LST token | 100M–1B | Yield / financial |
-| Gaming token | 1B+ | In-game micro-economy |
-
-**Solana standard decimals: 9.** Do not deviate — display issues will occur on wallets and explorers.
+This guide helps builders design transparent, sustainable, and production-ready tokenomics for Solana projects.
 
 ---
 
-## Step 2: Allocation Framework (2026 Standard)
+# Questions to Ask First
 
-A credible 2026 TGE separates supply into these categories:
+Before making recommendations, identify:
 
-| Allocation | Recommended % | Notes |
-|-----------|--------------|-------|
-| Public sale / community | 30–50% | Only freely tradeable supply at launch |
-| Team & founders | 15–20% | Must be locked — investors scrutinize this most |
-| Treasury / reserve | 15–25% | Lock where possible |
-| Ecosystem / grants | 10–15% | Vested releases tied to milestones |
-| Investors / private | 10–15% | Always vested, never unlocked at TGE |
-| Liquidity provision | 5–10% | Locked LP — never pull at launch |
-
-**2026 Investor Expectation:** All non-circulating supply must have verifiable on-chain lock proof before any public launch or fundraise. This is no longer a differentiator — it is a baseline requirement.
+- What type of token is being launched?
+- What is the token's primary utility?
+- Who are the target users?
+- Will there be private investors?
+- Will there be a public token sale?
+- Is staking planned?
+- Will governance be enabled?
+- Is long-term sustainability more important than rapid growth?
 
 ---
 
-## Step 3: Vesting Standards (2026)
+# Token Type Decision Tree
 
-- **Team / founders:** 12–24 month lock minimum. 12 months is the floor serious investors accept.
-- **Investors / private sale:** 6–12 month cliff + 12–24 month linear vesting.
-- **Ecosystem / grants:** Milestone-based releases preferred over time-based.
-- **Liquidity:** Lock LP tokens for minimum 6 months. Unlocked LP = rug signal.
+## Meme Coin
 
-**How on-chain locking works on Solana:**
-Tokens are held in Program Derived Address (PDA) vaults controlled by a smart contract. PDAs have no private keys — nobody can access tokens before the unlock date, not the team, not the platform. This replaces whitepaper promises with cryptographically verifiable proof.
+Focus on:
 
-**Recommended tools:**
-- Streamflow Finance — vesting, locks, staking, airdrops, real-time dashboard
-- Token Metadata standard via Metaplex for metadata configuration
+- Community ownership
+- Fair launch
+- Minimal complexity
 
----
+Recommended priorities
 
-## Step 4: Supply Configuration
-
-- **Mint authority:** Revoke after initial mint if supply is fixed. Keeping it = rug signal.
-- **Freeze authority:** Revoke unless you have a specific compliance reason.
-- **Update authority:** Keep only if you need to update metadata post-launch.
-
-**Revoking authorities costs ~0.1 SOL each.** Do it before launch, not after.
+- Community allocation
+- Liquidity
+- Transparency
 
 ---
 
-## Step 5: Emission Schedule
+## Utility Token
 
-For tokens with ongoing emissions (staking rewards, ecosystem incentives):
+Focus on:
 
-- Define a clear emission curve before launch — inflationary or deflationary
-- Publish the full unlock schedule publicly with on-chain links
-- Avoid sudden large unlocks — cliff events cause price volatility
-- Build a real-time tokenomics dashboard (Streamflow or custom) so anyone can verify
+- Product adoption
+- Ecosystem incentives
+- Treasury sustainability
 
----
+Recommended priorities
 
-## Common Mistakes
-
-- Launching with 100% unlocked team tokens → instant dump, community loss of confidence
-- No liquidity lock → rug signal, aggregators flag this
-- Skipping devnet testing of vesting contracts → bugs on mainnet are irreversible
-- Keeping mint authority → perceived infinite dilution risk
-- No public tokenomics breakdown → trust cannot be built without transparency
+- Treasury
+- Team vesting
+- Liquidity
+- Ecosystem incentives
 
 ---
 
-## Minimum Launch Costs (SOL)
+## Governance Token
 
-| Item | Cost |
-|------|------|
-| Token creation | ~0.5 SOL |
-| Authority revocations (each) | ~0.1 SOL |
-| Liquidity pool creation (Raydium) | ~0.3–0.5 SOL |
-| Actual liquidity deposit | Variable — plan this before launch |
+Focus on:
+
+- Decentralization
+- DAO participation
+- Long-term voting power
+
+Recommended priorities
+
+- Treasury
+- Community
+- Contributor incentives
+- Long vesting
 
 ---
 
-## Next Steps
+## DeFi Token
 
-- Choose your launch venue → see launch-venue.md
-- Plan your liquidity strategy → see liquidity-bootstrap.md
-- Design vesting schedules → see vesting-cliff.md
+Focus on:
+
+- Liquidity incentives
+- Sustainable emissions
+- Protocol growth
+
+Recommended priorities
+
+- Staking rewards
+- Treasury
+- Liquidity
+- Governance
+
+---
+
+## Gaming Token
+
+Focus on:
+
+- Player rewards
+- Ecosystem sustainability
+- Controlled emissions
+
+Recommended priorities
+
+- Reward pool
+- Treasury
+- Community incentives
+
+---
+
+# Token Program Selection
+
+Before designing allocations, decide which Solana token program to deploy on. This decision affects what features are available and cannot easily be changed after launch.
+
+## Legacy SPL Token
+
+Use when:
+
+- Maximum wallet and DEX compatibility is required
+- No advanced token features are needed
+- Simplicity is preferred over flexibility
+
+Limitations:
+
+- No native transfer fees
+- No native metadata
+- No transfer hooks
+- No confidential transfers
+
+## Token-2022 (Token Extensions)
+
+Use when:
+
+- Built-in royalty/transfer fee enforcement is needed
+- On-chain metadata without a separate metadata account is preferred
+- Transfer hooks are needed for custom logic (e.g. vesting enforcement, compliance checks)
+- Interest-bearing or non-transferable token mechanics are needed
+
+Common relevant extensions:
+
+| Extension | Use case |
+|-----------|----------|
+| Transfer Fee | Automatic fee on every transfer (e.g. for treasury funding) |
+| Transfer Hook | Custom logic on transfer (e.g. blocklist, vesting enforcement) |
+| Metadata Pointer | On-chain metadata without Metaplex dependency |
+| Non-Transferable | Soulbound tokens, governance badges |
+| Permanent Delegate | Required for some compliance/recovery use cases |
+
+Risk note: Token-2022 has lower wallet/DEX/aggregator support than legacy SPL Token. Verify that your target launch venue (Raydium, Meteora, pump.fun, Jupiter) fully supports the specific extensions you plan to use before committing. Always confirm current support status, as it changes frequently.
+
+Recommendation: Default to legacy SPL Token unless a specific extension solves a concrete problem in your tokenomics design. Do not adopt Token-2022 only because it is newer.
+
+---
+
+# Allocation Framework
+
+Typical categories and indicative ranges (not rules — adjust based on token type and goals):
+
+| Category | Purpose | Typical Range |
+|-----------|----------|----------------|
+| Community | Fair distribution, airdrops, rewards | 25–45% |
+| Treasury | Long-term development, runway | 15–25% |
+| Team | Builder incentives | 10–20% |
+| Investors | Strategic funding | 0–20% |
+| Liquidity | Market stability, DEX pools | 5–15% |
+| Ecosystem | Grants and partnerships | 5–15% |
+
+These ranges are reference points, not requirements. Meme coins typically skew heavily toward Community + Liquidity (often 80%+ combined) with minimal or zero Investor allocation. Governance and DeFi tokens typically carry larger Treasury and Ecosystem allocations to fund ongoing protocol development.
+
+Every allocation should have a documented purpose.
+
+Avoid creating wallets without clear justification.
+
+---
+
+# Vesting Principles
+
+Long-term alignment is critical.
+
+Recommended practices:
+
+- Team allocations should vest over time.
+- Investor allocations should include a cliff.
+- Treasury distributions should be transparent.
+- Community rewards should follow predefined rules.
+
+Avoid large unlock events that may destabilize the market.
+
+---
+
+# Supply Design
+
+Consider:
+
+- Total supply
+- Circulating supply
+- Inflation model
+- Emission schedule
+- Maximum supply (if applicable)
+
+Document every decision before launch.
+
+---
+
+# Authority Management
+
+Review all authorities before deployment.
+
+Consider:
+
+- Mint authority
+- Freeze authority
+- Update authority
+
+If an authority is retained, document the reason.
+
+---
+
+# Allocation Validation Checklist
+
+Before launch verify:
+
+- Community allocation is documented.
+- Treasury purpose is defined.
+- Team allocations are vested.
+- Investor allocations are locked.
+- Liquidity allocation is reserved.
+- No unexplained wallet allocations exist.
+
+---
+
+# Worked Example
+
+Example: a utility token with a total supply of 1,000,000,000 (1B) tokens.
+
+| Category | % | Tokens | Vesting |
+|-----------|---|--------|---------|
+| Community | 35% | 350,000,000 | Unlocked at TGE / claim-based |
+| Treasury | 20% | 200,000,000 | 4-year linear vest, 6-month cliff |
+| Team | 15% | 150,000,000 | 4-year linear vest, 12-month cliff |
+| Investors | 10% | 100,000,000 | 2-year linear vest, 6-month cliff |
+| Liquidity | 10% | 100,000,000 | Locked in LP at TGE (see liquidity-bootstrap.md) |
+| Ecosystem | 10% | 100,000,000 | Released per grant approval, no fixed schedule |
+
+At TGE (Token Generation Event), only Community and Liquidity allocations are typically liquid. In this example that is 450,000,000 tokens (45% of supply) circulating at launch, with the remaining 55% subject to vesting schedules.
+
+This is a starting template, not a fixed formula. Adjust ranges based on the Token Type Decision Tree above and the project's specific goals.
+
+---
+
+# Emissions
+
+If emissions are planned:
+
+Define:
+
+- Emission rate
+- Distribution schedule
+- Maximum inflation
+- Governance controls
+
+Avoid changing emission schedules without community communication.
+
+---
+
+# Risk Assessment
+
+High Risk
+
+- Unlimited mint authority
+- No vesting
+- Hidden allocations
+- Extremely concentrated ownership
+
+Medium Risk
+
+- Large treasury concentration
+- Short vesting periods
+- Aggressive emissions
+
+Lower Risk
+
+- Transparent allocations
+- Long-term vesting
+- Public documentation
+- Predictable emissions
+
+---
+
+# Common Mistakes
+
+Avoid:
+
+- Launching without documented tokenomics.
+- Excessive team allocations.
+- Large unlocked supplies.
+- Hidden treasury wallets.
+- Unclear emission schedules.
+- Frequent tokenomics changes after launch.
+
+---
+
+# Launch Readiness Checklist
+
+Before launch confirm:
+
+- Token supply finalized
+- Allocation documented
+- Vesting prepared
+- Treasury secured
+- Liquidity reserved
+- Authorities reviewed
+- Community documentation published
+
+---
+
+# Recommended Response Format
+
+Every recommendation should include:
+
+## Summary
+
+...
+
+## Recommended Allocation
+
+...
+
+## Vesting Strategy
+
+...
+
+## Risks
+
+...
+
+## Best Practices
+
+...
+
+## Launch Readiness
+
+...
+
+## Immediate Next Action
+
+...
+
+---
+
+# Best Practices
+
+Always:
+
+- Keep tokenomics simple.
+- Document every allocation.
+- Align incentives with long-term growth.
+- Publish transparent vesting schedules.
+- Prioritize sustainability over hype.
+
+---
+
+# Next Steps
+
+After tokenomics is finalized:
+
+1. Review launch-venue.md
+2. Review liquidity-bootstrap.md
+3. Review vesting-cliff.md
+4. Complete launch-readiness.md

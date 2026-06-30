@@ -1,131 +1,335 @@
 ﻿# Launch Venue Selection for Solana Tokens
 
-## Core Decision Framework
+## Purpose
 
-Your token type determines your launch venue. Wrong venue = fragmented liquidity, missed community, wasted fees.
+Choosing the right launch venue is one of the most important decisions in a Solana token launch.
 
----
+Different venues are optimized for different token types, liquidity models, communities, and launch strategies.
 
-## The 2026 Solana Launch Landscape
+Selecting the wrong venue can result in:
 
-### Venue Overview
+- Fragmented liquidity
+- Poor price discovery
+- Lower trading activity
+- Reduced visibility
+- Unnecessary migration costs
 
-| Venue | Best For | Pool Type | Fee |
-|-------|---------|-----------|-----|
-| pump.fun | Meme coins | Bonding curve → PumpSwap | 1% on buy/sell |
-| Bonk.fun (LetsBonk) | Meme coins | Bonding curve → Raydium | 0.1% tx fee |
-| Raydium LaunchLab | Utility / DeFi / established | AMM + CLMM | 0.25% standard pool |
-| Meteora DBC | New tokens needing bootstrapping | DLMM + bonding curve | Dynamic 0.01%–1% |
-| Orca Whirlpools | Established tokens, stable pairs | CLMM | 0.01%–1% by tier |
+Always choose the venue that best matches your project's goals rather than following current trends.
 
 ---
 
-## Decision Tree
+# Questions to Ask Before Choosing
 
-**Are you launching a meme coin?**
-→ Yes → Go to: Meme Coin Path below
-→ No → Go to: Utility / DeFi Token Path below
+Before making a recommendation, identify:
 
----
+- What type of token is being launched?
+- Is this a fair launch or a Token Generation Event (TGE)?
+- How much initial liquidity is available?
+- Who is the target community?
+- Is high launch volatility expected?
+- Will the project require concentrated liquidity?
+- Is long-term DeFi composability important?
 
-## Meme Coin Path
-
-### Option A: pump.fun (Default 2026 Choice)
-- Bonding curve model — price auto-discovers as people buy
-- At graduation (~ market cap): liquidity migrates automatically to **PumpSwap** (pump.fun's own DEX)
-- PumpSwap is now the **2nd largest AMM on Solana by volume**
-- Creator earns **0.05% on every swap** after graduation → on  daily volume = /day passive
-- Zero migration friction — your token appears on PumpSwap automatically
-- Bot ecosystem (bump bots, volume bots) optimized for PumpSwap natively
-- **Best for:** Any meme coin. This is where your community expects to find you.
-
-### Option B: Bonk.fun / LetsBonk
-- Same bonding curve model as pump.fun
-- At graduation: liquidity migrates to **Raydium** instead of PumpSwap
-- Creator earns **0.05% fee** — but more of revenue goes to BONK ecosystem buybacks + trencher rewards
-- Raydium graduation = deeper DeFi composability, more trading bot support
-- **Best for:** Meme coins targeting the BONK community or wanting Raydium liquidity depth
-
-### Meme Coin Rule
-Do NOT split liquidity between PumpSwap and Raydium at launch. Concentrate everything on one venue first — fragmented liquidity = worse pricing = less traders. Add secondary venues only after volume and liquidity are established.
+These answers determine the optimal launch path.
 
 ---
 
-## Utility / DeFi Token Path
+# Quick Selection Matrix
 
-### Option A: Raydium LaunchLab (Primary Choice)
-- Standard AMM pools: **0.25% fee**
-- CLMM pools: **0.01%–1%** (choose based on expected price range)
-- Default first listing venue for non-pump.fun tokens on Solana
-- Deep integration with Jupiter aggregator → your token gets routed automatically
-- **AcceleRaytor** heritage — designed for TGEs
-- 30-day swap volume: ~ (April 2026) — highest liquidity depth
-- **Best for:** Utility tokens, governance tokens, DeFi tokens launching via TGE
-
-### Option B: Meteora DLMM
-- Dynamic fee that adjusts with volatility — **0.01% to 1%** (calm vs. launch-day volatility differs by order of magnitude)
-- Concentrated liquidity in discrete bins — more capital efficient than standard AMM
-- DBC (Dynamic Bonding Curve) primitive — used by launchpads to bootstrap before graduating to standard pool
-- Fastest growing DEX on Solana — increasingly default for new token liquidity
-- 24h volume: ~ + pump.fun adjacent flow (April 2026)
-- **Best for:** New tokens needing capital-efficient bootstrapping, tokens not launched via pump.fun
-
-### Option C: Orca Whirlpools
-- CLMM pools with fee tiers: **0.01%, 0.05%, 0.30%, 1%**
-- Leading Solana DEX by volume: ** 24h / .76B 30-day** (April 2026)
-- Requires active position management — if price moves outside LP range, position earns zero fees
-- Simple, clean interface — approachable for non-technical founders
-- **Best for:** Established tokens with predictable price ranges, stable pairs (SOL/USDC, stablecoins)
-- **Not recommended** for: Brand new token launches with high volatility — go out-of-range immediately
+| If your goal is... | Recommended Venue |
+|--------------------|-------------------|
+| Launch a meme coin quickly | pump.fun |
+| Launch for the BONK ecosystem | Bonk.fun |
+| Launch a utility or governance token | Raydium LaunchLab |
+| Bootstrap liquidity efficiently | Meteora DBC |
+| Manage concentrated liquidity for an established token | Orca Whirlpools |
 
 ---
 
-## Jupiter: Not a Launch Venue, But Critical
+# Venue Overview
 
-Jupiter is a **DEX aggregator**, not a launch venue. It routes trades across Raydium, Orca, Meteora, and 20+ others.
+| Venue | Best For | Liquidity Model | Typical Fee Structure |
+|--------|----------|----------------|-----------------------|
+| pump.fun | Meme coins | Bonding Curve → PumpSwap | Platform-defined |
+| Bonk.fun | Meme coins | Bonding Curve → Raydium | Platform-defined |
+| Raydium LaunchLab | Utility, Governance, DeFi | AMM / CLMM | Pool dependent |
+| Meteora DBC | Bootstrapping new tokens | Dynamic Bonding Curve + DLMM | Dynamic |
+| Orca Whirlpools | Established assets | Concentrated Liquidity | Fee tier based |
 
-- 30-day routed volume: ~ (April 2026)
-- Zero protocol fee — users pay underlying pool fee only
-- **Your token gets indexed by Jupiter automatically** after enough liquidity and volume — this is when discovery explodes
-- MEV protection via Jito bundles integration
-- Action: After launch, verify your token is indexed on Jupiter. If not, check pool depth — minimum liquidity threshold required.
-
----
-
-## Fee Comparison Table
-
-| Venue | Standard Fee | Who Earns |
-|-------|-------------|-----------|
-| pump.fun / PumpSwap | 1% bonding, 0.05% creator post-grad | Creator + platform |
-| Bonk.fun | 0.1% tx, 0.05% creator | Creator + BONK ecosystem |
-| Raydium AMM | 0.25% | LPs + protocol |
-| Raydium CLMM | 0.01%–1% | LPs + protocol |
-| Meteora DLMM | Dynamic 0.01%–1% | LPs + protocol |
-| Orca Whirlpool | 0.01%–1% by tier | LPs |
+Always verify current fee structures before launch, as protocols may update parameters.
 
 ---
 
-## Real Talk: 2026 Volume Rankings (April Snapshot)
+# Decision Tree
 
-1. Jupiter (aggregator): ~ 30-day routed
-2. Raydium: ~ 30-day swap
-3. Orca:  24h / .76B 30-day
-4. Meteora:  24h + adjacent flow
+## Are you launching a meme coin?
 
-DEX rankings shift monthly — re-check DefiLlama for live numbers before any launch decision.
+YES
 
----
+↓
 
-## Anti-Patterns to Avoid
+Use the Meme Coin Path.
 
-- Launching on Orca for a brand new volatile token — will go out of range immediately
-- Splitting liquidity across 3 venues at launch — fragments depth, hurts price
-- Not checking Jupiter indexing post-launch — kills discoverability
-- Choosing venue based on brand recognition alone — match venue to token type
+NO
+
+↓
+
+Continue to the Utility / DeFi Path.
 
 ---
 
-## Next Steps
+# Meme Coin Path
 
-- Plan your liquidity amounts → see liquidity-bootstrap.md
-- Design vesting for your team → see vesting-cliff.md
+## Option A — pump.fun
+
+Recommended when:
+
+- Community-first launch
+- Fair launch
+- Viral distribution
+- Minimal setup
+
+Advantages
+
+- Simple launch experience
+- Automatic bonding curve pricing
+- Automatic migration to PumpSwap after graduation
+- Strong meme coin community
+- Large ecosystem of trading tools
+
+Considerations
+
+- Highly competitive environment
+- Success depends heavily on community traction
+- Limited customization during launch
+
+Best For
+
+- Meme projects
+- Community tokens
+- Experimental launches
+
+---
+
+## Option B — Bonk.fun
+
+Recommended when:
+
+- Targeting the BONK ecosystem
+- Community already overlaps with BONK users
+- Raydium liquidity is preferred after graduation
+
+Advantages
+
+- Familiar meme launch workflow
+- Strong BONK community exposure
+- Migration into the Raydium ecosystem
+
+Considerations
+
+- Smaller ecosystem than pump.fun
+- Success depends on BONK community engagement
+
+Best For
+
+- BONK-native communities
+- Meme tokens
+- Community experiments
+
+---
+
+# Meme Coin Recommendation
+
+Avoid splitting liquidity across multiple DEXs immediately after launch.
+
+Concentrated liquidity generally improves:
+
+- Price discovery
+- Trading depth
+- Community confidence
+
+Expand to additional venues only after liquidity and trading activity become sustainable.
+
+---
+
+# Utility / DeFi Token Path
+
+## Option A — Raydium LaunchLab
+
+Recommended when:
+
+- Launching a utility token
+- Governance token
+- Infrastructure project
+- DeFi protocol
+
+Advantages
+
+- Mature liquidity ecosystem
+- Strong integration with Jupiter routing
+- Supports both AMM and CLMM pools
+- Widely adopted across Solana
+
+Considerations
+
+- Requires more launch planning
+- Initial liquidity should be carefully sized
+
+Best For
+
+- Serious production projects
+- DAO launches
+- Infrastructure protocols
+
+---
+
+## Option B — Meteora DBC
+
+Recommended when:
+
+- Capital efficiency matters
+- Dynamic liquidity is preferred
+- Bootstrapping a new ecosystem
+
+Advantages
+
+- Dynamic fee model
+- Efficient liquidity utilization
+- Modern liquidity architecture
+
+Considerations
+
+- More advanced concepts for new founders
+- Requires understanding of DLMM mechanics
+
+Best For
+
+- Capital-efficient launches
+- DeFi ecosystems
+- New protocol launches
+
+---
+
+## Option C — Orca Whirlpools
+
+Recommended when:
+
+- Token price is relatively stable
+- Active liquidity management is available
+- Concentrated liquidity is desired
+
+Advantages
+
+- Capital-efficient LP positions
+- Multiple fee tiers
+- Clean user experience
+
+Considerations
+
+- LP positions require active management
+- Positions may stop earning fees if price exits the selected range
+
+Best For
+
+- Mature ecosystems
+- Stable trading pairs
+- Long-term liquidity management
+
+Not Recommended For
+
+- Highly volatile launches
+- Brand-new meme coins
+- Projects without active LP management
+
+---
+
+# Jupiter
+
+Jupiter is not a launch venue.
+
+It is Solana's leading DEX aggregator.
+
+After launch:
+
+- Verify your liquidity pool is discoverable through Jupiter.
+- Monitor routing quality.
+- Ensure sufficient liquidity for aggregation.
+
+Better liquidity generally improves routing quality and token discoverability.
+
+---
+
+# Comparison Table
+
+| Venue | Strength | Weakness |
+|--------|----------|----------|
+| pump.fun | Fastest meme launch | Limited customization |
+| Bonk.fun | BONK ecosystem | Smaller community reach |
+| Raydium | Mature ecosystem | Requires launch preparation |
+| Meteora | Capital efficiency | More advanced liquidity model |
+| Orca | Excellent CLMM | Active management required |
+
+---
+
+# Common Mistakes
+
+Avoid:
+
+- Choosing a venue based only on popularity.
+- Launching on a concentrated liquidity DEX without understanding position management.
+- Splitting liquidity across several DEXs on day one.
+- Ignoring Jupiter discoverability after launch.
+- Underestimating liquidity requirements.
+
+---
+
+# Recommended Response Format
+
+When answering launch venue questions, always provide:
+
+## Recommended Venue
+
+...
+
+## Why
+
+...
+
+## Advantages
+
+...
+
+## Risks
+
+...
+
+## Alternatives
+
+...
+
+## Immediate Next Action
+
+...
+
+---
+
+# Best Practices
+
+Always:
+
+- Match the venue to the token type.
+- Design liquidity before launch.
+- Verify discoverability after deployment.
+- Monitor liquidity health after launch.
+- Review protocol documentation before deploying.
+
+---
+
+# Next Steps
+
+After selecting a launch venue:
+
+1. Read **liquidity-bootstrap.md**
+2. Design vesting in **vesting-cliff.md**
+3. Review **launch-readiness.md**
+4. Complete **launch-checklist**

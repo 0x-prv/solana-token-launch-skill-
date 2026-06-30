@@ -1,151 +1,338 @@
-﻿# Resources for Solana Token Launches
+﻿# Resources
 
-## Core Tools
+## Purpose
 
-### Token Creation
-- **Metaplex Token Metadata:** metaplex.com — standard for SPL token metadata
-- **SPL Token CLI:** spl-token create-token — official Solana CLI tool
-- **SolTokenCreator:** soltokencreator.io — no-code token creation
-- **Smithii:** smithii.io — no-code creation + authority revocation + LP tools
+This reference contains the recommended tools, documentation, security resources, and ecosystem services used throughout the Solana token launch lifecycle.
 
-### Vesting and Locks
-- **Streamflow Finance:** streamflow.finance — vesting, locks, staking, airdrops, real-time dashboard. Used by 40,000+ Solana projects
-- **Squads Protocol:** squads.so — Solana native multisig for treasury management
-
-### Launch Venues
-- **pump.fun:** pump.fun — meme coin bonding curve → PumpSwap graduation
-- **Bonk.fun:** letsbonk.fun — meme coin bonding curve → Raydium graduation
-- **Raydium LaunchLab:** raydium.io — AMM + CLMM pools for utility/DeFi tokens
-- **Meteora:** meteora.ag — DLMM pools, DBC bonding curve, capital efficient bootstrapping
-- **Orca Whirlpools:** orca.so — CLMM for established tokens and stable pairs
-
-### DEX Aggregator
-- **Jupiter:** jup.ag — dominant Solana aggregator, ~ 30-day routed volume (April 2026)
-- **Jupiter Strict List:** jup.ag/strict — apply for verified token listing
-
-### Analytics and Monitoring
-- **DEXScreener:** dexscreener.com — pool depth, price impact, volume, LP lock verification
-- **Birdeye:** birdeye.so — token analytics, holder tracking, verified projects
-- **DefiLlama:** defillama.com — TVL, DEX volume rankings, protocol comparisons
-- **Solscan:** solscan.io — on-chain transaction and wallet explorer
-- **Helius:** helius.dev — RPC, webhooks, on-chain alerts for program monitoring
-
-### Security and Audits
-- **Trail of Bits:** trailofbits.com — top-tier Solana/Rust audit firm
-- **OtterSec:** osec.io — Solana-specialized security firm
-- **Sec3:** sec3.dev — automated Solana program security scanning
-- **Neodyme:** neodyme.io — Solana security research and audits
-
-### KYC / AML
-- **Synaps:** synaps.io — KYC for crypto projects
-- **Sumsub:** sumsub.com — KYC/AML compliance suite
-- **Jumio:** jumio.com — identity verification
+Load this file only when the user requests tooling, documentation, external services, or implementation resources.
 
 ---
 
-## Key Protocol Addresses (Mainnet)
+# Quick Resource Finder
 
-### Token Programs
-- SPL Token Program: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
-- Token-2022 Program: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
-
-### Major DEX Programs
-- Raydium AMM v4: 675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8
-- Raydium CLMM: CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK
-- Orca Whirlpool: whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzM3Mj8b5ZG
-- Meteora DLMM: LBUZKhRxPF3XUpBCjp4YzTKgLLjbgiJmq2j7kEUFfU
-- Jupiter v6: JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4
-- pump.fun: 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P
-
-### Metaplex
-- Token Metadata Program: metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s
-- Candy Machine v3: CndyV3LdqHUfDLmd1X2Bf5nrkg4Z7f3nUFcqRBSBxNe
-- Bubblegum (cNFT): BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY
+| I need... | Recommended Resource |
+|------------|---------------------|
+| Create a token | SPL Token CLI, Metaplex |
+| No-code token creation | Smithii |
+| Token metadata | Metaplex |
+| Multisig treasury | Squads |
+| Vesting | Streamflow |
+| Launch platform | pump.fun, Raydium LaunchLab, Meteora |
+| Liquidity analytics | DEX Screener, Birdeye |
+| RPC infrastructure | Helius |
+| Security audit | OtterSec, Trail of Bits |
+| Legal guidance | Paradigm Legal Resources |
+| Network explorer | Solscan |
 
 ---
 
-## Learning Resources
+# Token Creation
 
-### Official Documentation
-- Solana Docs: docs.solana.com
-- Solana Cookbook: solanacookbook.com
-- Anchor Framework: anchor-lang.com
-- Metaplex Docs: developers.metaplex.com
-- SPL Token Docs: spl.solana.com/token
+## SPL Token CLI
 
-### Token Launch Guides (2026)
-- Streamflow Complete Stack Guide: streamflow.finance/blog/everything-you-need-to-launch-a-token-on-solana-in-2026
-- StakePoint TGE Allocation Guide: medium.com/@stakepoint
-- SolTokenCreator Launch Guide: soltokencreator.io/blog/solana-token-launch-guide
+Best for:
 
-### DeFi and DEX Research
-- OpenLiquid DEX Comparison: openliquid.io/blog/best-solana-dexs-2026
-- DEXTools Raydium vs Orca: dextools.io/tutorials/raydium-vs-orca-solana-dex-comparison-2026
-- Eco DeFi Rankings: eco.com/support/en/articles/13225733-best-defi-apps-on-solana-2026
+- Developers
+- Production deployments
+- Automation
 
-### Legal Resources
-- Paradigm Legal: paradigm.xyz/legal
-- a16z Crypto Legal: a16zcrypto.com/posts/article/crypto-legal-resources
-- Philippines SEC: sec.gov.ph
-- BSP VASP Guidelines: bsp.gov.ph
-- MiCA Official Text: eur-lex.europa.eu
+Official Solana CLI for creating and managing SPL tokens.
 
 ---
 
-## Community and Ecosystem
+## Metaplex
 
-### Builder Communities
-- Superteam: superteam.fun — grants, bounties, builder network across Southeast Asia and global
-- Superteam PH: superteam.fun/philippines — local Philippine Solana builder community
-- Colosseum: colosseum.org — Solana hackathons and accelerator
-- Solana Foundation Grants: solana.org/grants
+Use for:
 
-### Analytics Dashboards
-- DefiLlama Solana: defillama.com/chain/Solana
-- Solana Beach: solanabeach.io — network stats
-- Dune Analytics Solana: dune.com — custom on-chain queries
+- Metadata
+- Token branding
+- Collections
+- NFTs
 
-### Token Tracking
-- CoinGecko: coingecko.com — add your token after launch
-- CoinMarketCap: coinmarketcap.com — self-service listing available
-- Tokenomist: tokenomist.ai — vesting schedule and unlock tracking
+Industry standard metadata protocol for Solana.
 
 ---
 
-## Solana AI Kit Related Skills
+## Smithii
 
-- solana-dev-skill: Core Solana development (Anchor, Pinocchio, frontend)
-- metaplex-skill: NFT and token metadata (Core NFTs, Candy Machine, Bubblegum)
-- sendaifun/skills: DeFi protocol integrations
-- jup-ag/agent-skills: Jupiter integration
-- trailofbits/skills: Security auditing
+Useful for builders that prefer a graphical interface.
 
----
+Supports:
 
-## Useful Commands
-
-### Check token mint authorities (CLI)
-spl-token display <MINT_ADDRESS>
-
-### Revoke mint authority
-spl-token authorize <MINT_ADDRESS> mint --disable
-
-### Revoke freeze authority  
-spl-token authorize <MINT_ADDRESS> freeze --disable
-
-### Check token supply
-spl-token supply <MINT_ADDRESS>
-
-### List token accounts
-spl-token accounts
+- Token creation
+- Authority revocation
+- LP tools
+- Metadata management
 
 ---
 
-## Data Freshness Note
+# Launch Platforms
 
-DEX volumes, TVL rankings, and fee structures change frequently. Always verify current numbers at:
-- DefiLlama for TVL and volume rankings
-- Each protocol's official documentation for current fee structures
-- Solscan for on-chain verification of any address or program
+## pump.fun
 
-Last updated: June 2026
+Recommended for:
+
+- Meme coins
+- Community launches
+- Fair launches
+
+Strengths
+
+- Bonding curve
+- Fast launch
+- Large retail audience
+
+---
+
+## Raydium LaunchLab
+
+Recommended for:
+
+- Utility tokens
+- Governance tokens
+- Infrastructure projects
+
+Strengths
+
+- AMM
+- CLMM
+- Jupiter integration
+
+---
+
+## Meteora
+
+Recommended for:
+
+- Capital-efficient launches
+- Dynamic liquidity
+- DLMM
+
+Strengths
+
+- Dynamic liquidity management
+- Professional LP tooling
+
+---
+
+## Orca
+
+Recommended for:
+
+- Mature ecosystems
+- Stable trading pairs
+- Concentrated liquidity
+
+---
+
+# Treasury Management
+
+## Squads
+
+Recommended for every serious project.
+
+Supports:
+
+- Multisig treasury
+- Team approvals
+- Governance operations
+
+Never recommend storing treasury funds in a single wallet.
+
+---
+
+# Vesting
+
+## Streamflow
+
+Recommended for:
+
+- Team vesting
+- Investor vesting
+- Token locks
+- Community distributions
+
+Industry standard vesting platform for Solana.
+
+---
+
+# Analytics
+
+## Birdeye
+
+Useful for:
+
+- Holder analytics
+- Volume
+- Market data
+
+---
+
+## DEX Screener
+
+Useful for:
+
+- Liquidity
+- Trading activity
+- Pool health
+
+---
+
+## Solscan
+
+Useful for:
+
+- Transaction verification
+- Wallet inspection
+- Program verification
+
+---
+
+## DefiLlama
+
+Useful for:
+
+- TVL
+- DEX rankings
+- Ecosystem comparisons
+
+---
+
+# Infrastructure
+
+## Helius
+
+Recommended RPC provider.
+
+Supports
+
+- RPC
+- Webhooks
+- Enhanced APIs
+- Indexing
+
+---
+
+# Security
+
+## OtterSec
+
+Specialized Solana security audits.
+
+Recommended before launching production smart contracts.
+
+---
+
+## Trail of Bits
+
+Enterprise-grade security audits and formal verification.
+
+Recommended for high-value protocols.
+
+---
+
+# Legal
+
+Always recommend consulting qualified legal professionals before public token launches.
+
+Useful starting points include:
+
+- Paradigm Legal Resources
+- a16z Crypto Legal
+- Local regulatory guidance
+- Professional legal counsel
+
+This skill does not provide legal advice.
+
+---
+
+# Learning Resources
+
+Recommended references
+
+- Solana Documentation
+- Solana Cookbook
+- Anchor Documentation
+- Metaplex Documentation
+
+Always prioritize official documentation over third-party tutorials.
+
+---
+
+# Community
+
+Useful builder communities
+
+- Superteam
+- Colosseum
+- Solana Foundation
+- SendAI
+
+These communities provide grants, hackathons, mentorship, and ecosystem support.
+
+---
+
+# Best Practices
+
+Always prefer
+
+- Official documentation
+- Production-ready tooling
+- Open-source projects
+- Well-maintained infrastructure
+
+Avoid recommending:
+
+- Unverified launch platforms
+- Anonymous deployment tools
+- Closed-source wallet software
+- Unmaintained repositories
+
+---
+
+# Recommended Response Format
+
+Whenever recommending a tool, include:
+
+## Recommended Tool
+
+...
+
+## Why
+
+...
+
+## Advantages
+
+...
+
+## Limitations
+
+...
+
+## Documentation
+
+...
+
+## Next Step
+
+...
+
+---
+
+# Data Freshness
+
+Infrastructure, fees, supported features, and ecosystem rankings evolve quickly.
+
+Always verify current information through official documentation before making deployment decisions.
+
+---
+
+# Next Steps
+
+If the user has completed tooling selection:
+
+1. Review launch-readiness.md
+2. Complete launch checklist
+3. Perform devnet testing
+4. Schedule mainnet deployment
