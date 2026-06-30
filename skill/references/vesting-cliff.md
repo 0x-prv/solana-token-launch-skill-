@@ -161,6 +161,23 @@ Avoid using immediate unlocks for large insider allocations.
 
 ---
 
+# Indicative Duration Ranges
+
+These are common industry starting points, not fixed rules. Adjust based on project roadmap length, token type, and investor expectations.
+
+| Allocation | Typical Cliff | Typical Total Vesting | Notes |
+|------------|---------------|------------------------|-------|
+| Team / Founders | 6–12 months | 2–4 years, linear after cliff | Longer vesting signals stronger long-term commitment |
+| Private Investors (seed/strategic) | 3–6 months | 1–2 years, linear after cliff | Shorter than team to reflect earlier capital risk |
+| Public Sale Participants | None | Immediate or short linear (0–3 months) | Public sale buyers typically expect liquidity at or near TGE |
+| Advisors | 0–3 months | 1–2 years, often milestone-gated | Frequently tied to deliverables rather than time alone |
+| Ecosystem / Grants | None (per-grant) | Released per milestone, no fixed end date | Governed by grant approval process, not a calendar schedule |
+| Treasury | N/A | N/A — governed by multisig + governance, not vesting | Treasury is not "vested," it is access-controlled |
+
+A cliff shorter than 3 months for team or private investor allocations is generally considered a weak signal during due diligence, as it allows near-immediate selling pressure.
+
+---
+
 # Treasury Best Practices
 
 Treasury assets should:
@@ -187,6 +204,46 @@ Before investing, experienced participants typically verify:
 - Public documentation
 
 Transparent vesting builds confidence.
+
+---
+
+# Worked Example
+
+**Input provided by user:**
+
+A governance token project, 1B total supply, with a 3-year roadmap. Team holds 15% (150,000,000 tokens), private investors hold 10% (100,000,000 tokens), and the public sale is 5% (50,000,000 tokens).
+
+**Resulting recommendation:**
+
+## Recommended Vesting
+
+- Team: 12-month cliff, then 3-year linear vest (36 monthly unlocks of ~4,166,666 tokens after cliff)
+- Private Investors: 6-month cliff, then 18-month linear vest
+- Public Sale: No cliff, fully liquid at TGE
+
+## Why
+
+The 3-year roadmap supports a longer team vesting horizon than the general 2–4 year range's lower bound, signaling strong long-term commitment appropriate for a governance token where holder trust directly affects DAO participation. Investor vesting is shorter than team vesting to reflect their earlier-stage capital risk, while the public sale remains liquid since those participants are entering at TGE pricing with full market risk.
+
+## Advantages
+
+Clear separation between insider and public liquidity timelines reduces the chance of investors or team members exiting before public participants. Aligns with standard governance token expectations seen across the Solana ecosystem.
+
+## Risks
+
+The first major unlock cliff event (month 6, when investor vesting begins) should be communicated to the community well in advance to avoid surprise sell pressure, even though it is a gradual linear release rather than a single unlock.
+
+## Best Practices
+
+Use an on-chain vesting solution (e.g. Streamflow) rather than manual distribution, and publish the full unlock schedule publicly before TGE.
+
+## Readiness
+
+Vesting structure is launch-ready pending publication of the public unlock schedule and on-chain vesting contract setup.
+
+## Immediate Next Action
+
+Configure on-chain vesting contracts for team and investor allocations before finalizing the TGE date.
 
 ---
 

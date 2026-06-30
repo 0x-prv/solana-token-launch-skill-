@@ -105,6 +105,8 @@ Considerations
 - Community momentum is critical
 - Highly competitive environment
 
+Typical capital note: Bonding curve launches generally do not require the founder to seed initial liquidity directly — the curve itself provides price discovery, and liquidity migrates to a DEX automatically once a graduation threshold (in SOL raised) is met. Confirm the current graduation threshold on the chosen platform, as these change over time.
+
 ---
 
 # Strategy B — Standard AMM Pool
@@ -134,6 +136,16 @@ Typical Workflow
 4. Verify pool configuration.
 5. Lock liquidity.
 6. Monitor trading activity.
+
+Indicative liquidity sizing (directional starting points, not guarantees — actual needs depend on expected trading volume and token price target):
+
+| Project Stage | Indicative Initial Liquidity (paired value, e.g. SOL/USDC side) |
+|----------------|-------------------------------------------------------------------|
+| Early-stage / community utility token | $5,000 – $20,000 |
+| Funded utility or governance token | $20,000 – $100,000 |
+| Established DeFi protocol | $100,000+ |
+
+Thin liquidity (e.g. under $5,000 paired value) on a standard AMM typically produces high price impact on even small trades, which can discourage early holders. Always size liquidity relative to expected trade sizes, not just total budget available.
 
 ---
 
@@ -177,8 +189,18 @@ Best Practices
 
 - Publish lock information.
 - Make the lock publicly verifiable.
-- Use reputable locking solutions.
+- Use reputable locking solutions (e.g. Streamflow).
 - Align lock duration with project roadmap.
+
+Indicative lock durations:
+
+| Project Type | Typical Lock Duration |
+|--------------|------------------------|
+| Meme coin / community launch | 3–6 months minimum, often permanent (burned) |
+| Utility token | 6–12 months minimum |
+| DeFi protocol / governance token | 12 months minimum, often tied to vesting schedule |
+
+Shorter locks than these ranges are a common community red flag and typically reduce trust signals during due diligence.
 
 ---
 
@@ -236,6 +258,44 @@ Before launch, answer:
 - Is there an emergency liquidity plan?
 
 Liquidity should be treated as long-term infrastructure rather than marketing spend.
+
+---
+
+# Worked Example
+
+**Input provided by user:**
+
+A utility token launching on Raydium LaunchLab, targeting an initial price of $0.001 per token, with 100,000,000 tokens (10% of a 1B supply) allocated to liquidity. The team has a budget of $30,000 for initial liquidity.
+
+**Resulting recommendation:**
+
+## Recommended Strategy
+
+Standard AMM Pool (Raydium LaunchLab), paired with USDC for stable price reference given the utility token classification.
+
+## Sizing
+
+Pair $30,000 USDC against the 100,000,000 token allocation. This falls within the "Funded utility token" range ($20,000–$100,000) and should support moderate trading volume with acceptable price impact for typical trade sizes (under $500).
+
+## Why
+
+USDC pairing gives users and integrators a stable reference price, which is preferable for a utility token where predictable pricing supports product adoption over speculative trading.
+
+## Advantages
+
+Full control over initial price ($0.001), predictable liquidity depth, straightforward integration with Jupiter for routing.
+
+## Risks
+
+At this liquidity depth, trades above roughly $1,000–$2,000 may experience noticeable price impact. Monitor pool depth in the first week and be prepared to add liquidity if trading volume exceeds expectations.
+
+## Best Practices
+
+Lock the LP position for a minimum of 6–12 months using a reputable locking solution, and publish the lock details publicly before announcing the launch.
+
+## Immediate Next Action
+
+Finalize the $30,000 liquidity deposit, create the pool on Raydium LaunchLab, and lock the LP position before any public announcement.
 
 ---
 
